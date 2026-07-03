@@ -1,28 +1,27 @@
-# importa ANTLR4 para funciones, aquí activamos el enviroment 
-from antlr4 import *
-# importarlo para obtener sus metodos 
+# Importa ANTLR4 para funciones
+from antlr4 import*
 from ExprLexer import ExprLexer
+import sys
 
-import sys 
 
-# lo que obtiene es la entrada 
+# Lo que obtiene es la entrada , analiza el texto y lo separa en tokes
 input_stream = FileStream(sys.argv[1])
-# obtiene la entraada de datos, lo analiza y lo separa en tokens
+
+
 lexer = ExprLexer(input_stream)
-
+# Toma los tokens que produjo el lexer y los guarda en un flujo/lista
 tokens = CommonTokenStream(lexer)
-# lo llenamos 
 tokens.fill()
-
 print(tokens)
 
-# contiene el arreglo de tokens, los recorre y los imprime
+
+print(f"{'LEXEMA':<15} {'TOKEN':<15} {'TIPO':<6} {'LINEA':<6} {'COLUMNA':<8}")
+print("-" * 60)
+
 for token in tokens.tokens:
-    print("Texto: " + token.text)
-    print("Línea: " + str(token.line))
-    print("Columna: " + str(token.column))
+    if token.type == Token.EOF:
+        continue
+
     nombre_token = lexer.symbolicNames[token.type]
 
-    print("Tipo : " + nombre_token)
-
-    print("==========")
+    print(f"{token.text:<15} {nombre_token:<15} {token.type:<6} {token.line:<6} {token.column:<8}")

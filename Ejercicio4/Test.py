@@ -26,3 +26,5 @@ for token in tokens.tokens:
         nombre_token = lexer.symbolicNames[token.type]
         print("Nombre del token: " + nombre_token)
         print("==========")
+
+        print(f"{token.text:<15} {nombre_token:<15} {token.type:<6} {token.line:<6} {token.column:<8}")
