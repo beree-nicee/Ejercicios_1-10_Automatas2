@@ -28,9 +28,9 @@ class ExprParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "<INVALID>", "'+'" ]
+    literalNames = [ "<INVALID>", "<INVALID>", "'-'" ]
 
-    symbolicNames = [ "<INVALID>", "NUM", "MAS", "WS" ]
+    symbolicNames = [ "<INVALID>", "NUM", "MENOS", "WS" ]
 
     RULE_root = 0
     RULE_expr = 1
@@ -39,7 +39,7 @@ class ExprParser ( Parser ):
 
     EOF = Token.EOF
     NUM=1
-    MAS=2
+    MENOS=2
     WS=3
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
@@ -107,8 +107,8 @@ class ExprParser ( Parser ):
                 return self.getTypedRuleContext(ExprParser.ExprContext,i)
 
 
-        def MAS(self):
-            return self.getToken(ExprParser.MAS, 0)
+        def MENOS(self):
+            return self.getToken(ExprParser.MENOS, 0)
 
         def getRuleIndex(self):
             return ExprParser.RULE_expr
@@ -142,7 +142,7 @@ class ExprParser ( Parser ):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
                     self.state = 11
-                    self.match(ExprParser.MAS)
+                    self.match(ExprParser.MENOS)
                     self.state = 12
                     self.expr(3) 
                 self.state = 17
