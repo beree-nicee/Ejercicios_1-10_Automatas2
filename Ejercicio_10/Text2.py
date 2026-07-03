@@ -2,7 +2,7 @@ from antlr4 import *
 from ExprLexer import ExprLexer
 import sys
 
-input_stream = FileStream (sys.argv[1]) 
+input_stream = FileStream (sys.argv[1], encoding='utf-8') 
 
 lexer = ExprLexer(input_stream)
 tokens = CommonTokenStream (lexer)
